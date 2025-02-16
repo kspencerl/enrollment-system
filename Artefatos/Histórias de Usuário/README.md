@@ -1,35 +1,98 @@
-# Descrição em Histórias de Usuário
+# Sistema de Matrículas Universitário
 
-## 📌 Eu, como universidade, preciso de um Sistema de Matrículas
-Quero gerir as matérias em que os meus alunos estão inseridos para controlar as salas que serão ocupadas.
+## Funcionalidades do Sistema
 
-### ✅ Critérios de Avaliação
-1. O sistema deve conseguir selecionar e separar as determinadas salas para as matérias.
-2. A universidade deve conseguir alterar os alunos das suas salas conforme o necessário.
-
----
-
-## 📌 Eu, como aluno da universidade, preciso de um Sistema de Matrículas
-Quero me registrar nas minhas respectivas matérias para conseguir completar todas as matérias do curso.
-
-### ✅ Critérios de Avaliação
-1. O aluno deve ser capaz de se auto cadastrar nas matérias desejadas.
-2. O sistema deve contemplar todas as matérias que aquele aluno pode cursar.
+- Autenticação e gerenciamento de usuários
+- Matrícula e cancelamento de disciplinas
+- Gerenciamento do currículo acadêmico
+- Controle de disponibilidade de disciplinas
+- Consulta de alunos matriculados
+- Integração com o sistema de cobrança
 
 ---
 
-## 📌 Eu, como professor da universidade, quero um Sistema de Matrículas
-Quero saber quais são os alunos que estão matriculados em cada disciplina para ter o controle das minhas aulas.
+## Histórias de Usuário
 
-### ✅ Critérios de Avaliação  
-1. O sistema deve exibir todas as suas turmas que o professor tem domínio.
-2. O professor deve ser capaz de ver a capacidade atual de cada matéria.
+### Autenticação
+| **Como** | aluno, professor ou secretário                                |
+|----------|---------------------------------------------------------------|
+| **Quero** | acessar o sistema usando minhas credenciais de acesso         |
+| **Para que** | eu possa visualizar e gerenciar minhas informações acadêmicas |
+
+**Critérios de Aceitação:**
+- O usuário deve inserir login e senha válidos.
+- O sistema deve validar as credenciais inseridas para liberação de acesso ao sistema.
 
 ---
 
-## 📌 Eu, como secretária da universidade, preciso de um Sistema de Matrículas
-Quero gerar um currículo em cada semestre e manter as informações sobre as disciplinas, professores e alunos para facilitar na manutenção e gestão de cada semestre.
+### Efetuar Matrícula em Disciplinas
+| **Como** | aluno |
+|----------|--------------------------------------|
+| **Quero** | me inscrever em disciplinas obrigatórias e optativas |
+| **Para que** | eu possa cursá-las no próximo semestre |.
 
-### ✅ Critérios de Avaliação
-1. A secretária deve conseguir acessar e atualizar as informações sobre disciplinas, professores e alunos.
-2. O sistema deve permitir a geração automática do currículo de cada semestre.
+**Critérios de Aceitação:**
+- O aluno pode escolher até 4 disciplinas obrigatórias e 2 optativas.
+- A matrícula só será aceita se houver vagas disponíveis.
+- A matrícula só pode ser feita dentro do período definido pela universidade.
+
+---
+
+### Cancelar Matrícula
+| **Como** | aluno |
+|----------|--------------------------------------|
+| **Quero** | cancelar minha matrícula em uma disciplina |
+| **Para que** | eu possa reorganizar minha grade de estudos antes do prazo final |
+
+**Critérios de Aceitação:**
+- O cancelamento só pode ser feito dentro do período de matrícula.
+- Após o cancelamento, a vaga na disciplina fica disponível para outro aluno.
+
+### Encerramento de Matrículas em Disciplinas Lotadas
+| **Como** | aluno |
+|----------|--------------------------------------|
+| **Quero** | ser informado quando uma disciplina atingir o limite de vagas |
+| **Para que** | eu possa escolher outra opção antes do encerramento da matrícula |
+
+**Critérios de Aceitação:**
+- O sistema exibe um aviso quando restam poucas vagas na disciplina.
+- Quando a disciplina atinge 60 alunos, novas matrículas não são permitidas.
+
+---
+
+### Consultar Alunos Matriculados
+| **Como** | professor |
+|----------|--------------------------------------|
+| **Quero** | visualizar a lista de alunos matriculados em minhas disciplinas |
+| **Para que** | eu possa planejar minhas aulas e avaliações |
+
+**Critérios de Aceitação:**
+- O professor pode acessar a lista de alunos a qualquer momento.
+- O sistema deve exibir nome, matrícula e e-mail dos alunos matriculados.
+- A disciplina só será oferecida se tiver pelo menos 3 alunos matriculados.
+
+---
+
+### Gerenciar Currículo do Semestre
+| **Como** | secretária                                                      |
+|----------|-----------------------------------------------------------------|
+| **Quero** | cadastrar e atualizar as disciplinas disponíveis a cada semestre |
+| **Para que** | os alunos possam se matricular                     |
+
+
+**Critérios de Aceitação:**
+- O sistema permite adicionar, editar e remover disciplinas.
+- Cada disciplina deve estar vinculada a um professor.
+- O sistema deve validar se a disciplina atende aos critérios mínimos de alunos.
+
+---
+
+### Notificação do Sistema de Cobrança
+| **Como** | sistema de matrículas |
+|----------|-------------------------------------------------|
+| **Quero** | notificar o sistema de cobrança após a matrícula do aluno |
+| **Para que** | ele possa gerar a fatura correspondente |
+
+**Critérios de Aceitação:**
+- O sistema envia uma notificação automática após a matrícula ser confirmada.
+- A cobrança deve ser gerada apenas para disciplinas efetivamente cursadas.
