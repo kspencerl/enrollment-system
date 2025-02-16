@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Aluno" as Aluno
+actor "Professor" as Professor
+actor "Secretaria" as Secretaria
+actor "Sistema de Cobrança" as SistemaCobranca
+
+rectangle "Sistema de Matrículas Universidade" {
+    Aluno -- (UC001 - Realizar login)
+    Aluno -- (UC002 - Efetuar matrícula em disciplinas)
+    Aluno -- (UC003 - Cancelar matrícula em disciplinas)
+
+    Professor -- (UC004 - Consultar alunos matriculados)
+
+    Secretaria -- (UC005 - Gerenciar currículo do semestre)
+    Secretaria -- (UC006 - Gerenciar disciplinas)
+    Secretaria -- (UC007 - Gerenciar professores)
+
+    (UC002 - Efetuar matrícula em disciplinas) ..> (UC008 - Notificar Sistema de Cobrança) : "Após matrícula"
+    SistemaCobranca -- (UC008 - Notificar Sistema de Cobrança)
+}
+@enduml
