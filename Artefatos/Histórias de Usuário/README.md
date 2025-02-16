@@ -21,7 +21,8 @@
 
 **Critérios de Aceitação:**
 - O usuário deve inserir login e senha válidos.
-- O sistema deve validar as credenciais inseridas para liberação de acesso ao sistema.
+- O sistema deve validar as credenciais inseridas para liberação de acesso ao sistema. 
+- Ao realizar a validação necessária, se as credenciais forem inválidas, o sistema deve exibir uma mensagem de erro e impedir o acesso.
 
 ---
 
