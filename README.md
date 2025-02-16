@@ -26,33 +26,6 @@ Representação gráfica dos principais casos de uso:
 As histórias de usuário detalham as necessidades e expectativas de cada perfil dentro do sistema.
 - [Detalhamento Histórias de Usuário ](Artefatos/Histórias%20de%20Usuário/README.md)
 
-### Aluno  
-
-| **Como** | **Quero** | **Para que** |
-|------------------|----------|-------------|
-| aluno | me inscrever em disciplinas obrigatórias e optativas | possa cursá-las no próximo semestre |
-| aluno | cancelar uma matrícula dentro do prazo permitido | possa ajustar meu plano de estudos conforme necessário |
-| aluno | receber uma notificação após minha matrícula | saiba que minha inscrição foi confirmada |
-| aluno | ser notificado se uma disciplina for cancelada por falta de alunos | possa escolher outra disciplina antes do prazo final |
-
-### Professor 
-| **Como**  | **Quero** | **Para que** |
-|----------------------|----------|-------------|
-| professor | visualizar a lista de alunos matriculados em minhas disciplinas | possa planejar minhas aulas e avaliações |
-| professor | acessar o histórico de matrículas dos meus alunos | possa acompanhar seu desempenho acadêmico |
-
-### Secretaria Acadêmica  
-| **Como** | **Quero** | **Para que** |
-|----------------------------------|----------|-------------|
-| secretaria acadêmica | cadastrar e editar disciplinas no sistema | os alunos possam se matricular corretamente |
-| secretaria acadêmica | definir o período de matrículas | o sistema aceite inscrições apenas no tempo correto |
-| secretaria acadêmica | validar a quantidade mínima de alunos por disciplina | apenas turmas viáveis sejam confirmadas para o semestre |
-
-### Sistema de Cobrança 
-| **Como** | **Quero** | **Para que** |
-|----------------------------------|----------|-------------|
-| sistema de matrículas | notificar o sistema de cobrança após a matrícula do aluno | ele possa gerar a fatura correspondente |
-
 ## Diagrama de Classe  
 O diagrama de classes representa a estrutura do sistema, mostrando a relação entre **Alunos, Professores, Disciplinas, Matrículas e Secretaria Acadêmica**.  
 
