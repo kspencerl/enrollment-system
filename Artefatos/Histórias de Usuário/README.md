@@ -48,6 +48,8 @@
 - O cancelamento só pode ser feito dentro do período de matrícula.
 - Após o cancelamento, a vaga na disciplina fica disponível para outro aluno.
 
+---
+
 ### Encerramento de Matrículas em Disciplinas Lotadas
 | **Como** | aluno |
 |----------|--------------------------------------|
