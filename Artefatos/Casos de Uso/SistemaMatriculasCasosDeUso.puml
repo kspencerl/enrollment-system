@@ -1,13 +1,20 @@
 @startuml
 left to right direction
 
+actor "Usuário" as Usuario
 actor "Aluno" as Aluno
 actor "Professor" as Professor
 actor "Secretaria" as Secretaria
 actor "Sistema de Cobrança" as SistemaCobranca
 
+Usuario <|-- Aluno
+Usuario <|-- Professor
+Usuario <|-- Secretaria
+Usuario <|-- SistemaCobranca
+
 rectangle "Sistema de Matrículas Universidade" {
-    Aluno -- (UC001 - Realizar login)
+    Usuario -- (UC001 - Realizar login)
+
     Aluno -- (UC002 - Efetuar matrícula em disciplinas)
     Aluno -- (UC003 - Cancelar matrícula em disciplinas)
 
