@@ -44,8 +44,8 @@ Em caso de dúvidas ou sugestões, entre em contato com a equipe do projeto:
 | Nome | E-mail |
 |------|--------|
 | Erica Alves dos Santos | erica.santos.1437314@sga.pucminas.br |
-| Joana Iuna de Morais | [email2@email.com] |
+| Joana Iuna de Morais | jimorais@sga.pucminas.br |
 | Kimberly Liz Spencer Lourenço| kimberly.liz@sga.pucminas.br |
-| Sidney Soares Santos Barbosa | [sidney.barbosa@sga.pucminas.br] |
+| Sidney Soares Santos Barbosa | sidney.barbosa@sga.pucminas.br |
 
 
