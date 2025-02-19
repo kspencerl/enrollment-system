@@ -36,6 +36,7 @@ Este projeto utiliza as seguintes tecnologias:
 |------------|------------|
 | **Java** | Linguagem principal usada para desenvolver a aplicação console. Permite interação via linha de comando para matrículas e gerenciamento de disciplinas. |
 | **PlantUML** | Ferramenta para criação de diagramas UML, incluindo Casos de Uso e Diagramas de Classe. |
+| **Draw.io** | Ferramenta de diagramação online para criar fluxogramas, mapas mentais, diagramas de rede e outros gráficos. |
 | **Git/GitHub** | Controle de versão e armazenamento do código e documentação do projeto. |
 
 ## Contato  
