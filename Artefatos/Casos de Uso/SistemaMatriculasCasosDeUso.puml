@@ -10,7 +10,6 @@ actor "Sistema de Cobrança" as SistemaCobranca
 Usuario <|-- Aluno
 Usuario <|-- Professor
 Usuario <|-- Secretaria
-Usuario <|-- SistemaCobranca
 
 rectangle "Sistema de Matrículas Universidade" {
     Usuario -- (UC001 - Realizar login)
