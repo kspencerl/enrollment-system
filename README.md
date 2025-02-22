@@ -20,7 +20,7 @@ O sistema permite que alunos, professores e a secretaria interajam através de d
 
 Representação gráfica dos principais casos de uso: 
 
-![Diagrama de Casos de Uso](Artefatos/Casos%20de%20Uso/SistemaMatriculasCasosDeUso_V1.png)
+![Diagrama de Casos de Uso](Artefatos/Casos%20de%20Uso/SistemaMatriculasCasosDeUso_V2.png)
 
 ## Histórias de Usuário
 As histórias de usuário detalham as necessidades e expectativas de cada perfil dentro do sistema.
