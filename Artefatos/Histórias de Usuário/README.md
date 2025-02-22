@@ -2,7 +2,7 @@
 
 ## Funcionalidades do Sistema
 
-- Autenticação e gerenciamento de usuários
+- Autenticação
 - Matrícula e cancelamento de disciplinas
 - Gerenciamento do currículo acadêmico
 - Controle de disponibilidade de disciplinas
