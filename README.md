@@ -29,6 +29,10 @@ As histórias de usuário detalham as necessidades e expectativas de cada perfil
 ## Diagrama de Classe  
 O diagrama de classes representa a estrutura do sistema, mostrando a relação entre **Alunos, Professores, Disciplinas, Matrículas e Secretaria Acadêmica**.  
 
+## Diagrama de Banco de Dados  
+A modelagem representa a estrutura do sistema de matrícula da Universidade, organizando a relação entre **Alunos, Professores, Disciplinas, Matrículas e Secretaria Acadêmica**.
+![Modelagem Banco de Dados](Artefatos/Modelagem%20BD/ModelagemBD.png)
+
 ## Tecnologias Utilizadas 
 Este projeto utiliza as seguintes tecnologias:
 
