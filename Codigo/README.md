@@ -9,7 +9,7 @@ Para rodar a aplicação localmente, siga os passos a seguir:
     git clone https://github.com/kspencerl/enrollment-system.git
     ```
 
-2. Execute o comando para iniciar os serviços Docker:
+2. Entre no diretório ./Codigo e execute o comando para iniciar os serviços Docker:
     ```bash
     docker-compose up
     ```
