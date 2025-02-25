@@ -4,30 +4,13 @@ services:
     container_name: pucminas_db
     image: postgres:latest
     environment:
-      POSTGRES_USER: pucminas
-      POSTGRES_PASSWORD: difficult321
-      POSTGRES_DB: enrollment-system
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: universidade
     ports:
       - "5433:5432"
     volumes:
       - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-    networks:
-      - app-network
-
-  app:
-    container_name: enrollment_app
-    image: enrollment-app:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/enrollment-system
-      SPRING_DATASOURCE_USERNAME: pucminas
-      SPRING_DATASOURCE_PASSWORD: difficult321
-    depends_on:
-      - database
     networks:
       - app-network
 
