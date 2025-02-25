@@ -1,6 +1,3 @@
--- Criar banco de dados
-CREATE DATABASE Universidade;
-
 -- Criar tipos ENUM
 DROP TYPE IF EXISTS tipo_usuario CASCADE;
 CREATE TYPE tipo_usuario AS ENUM ('ALUNO', 'PROFESSOR', 'SECRETARIA');
