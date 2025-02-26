@@ -21,7 +21,6 @@ CREATE TYPE status_cobranca AS ENUM ('PENDENTE', 'PAGA');
 DROP TABLE IF EXISTS Cobranca CASCADE;
 DROP TABLE IF EXISTS Matricula CASCADE;
 DROP TABLE IF EXISTS Periodo_Matricula CASCADE;
-DROP TABLE IF EXISTS Professor_Disciplina CASCADE;
 DROP TABLE IF EXISTS Disciplina CASCADE;
 DROP TABLE IF EXISTS Professor CASCADE;
 DROP TABLE IF EXISTS Aluno CASCADE;
@@ -56,24 +55,24 @@ CREATE TABLE Professor (
                            FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE Secretaria (
+                           id SERIAL PRIMARY KEY,
+                           id_usuario INT NOT NULL UNIQUE,
+                           FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
+);
+
 CREATE TABLE Disciplina (
                             id SERIAL PRIMARY KEY,
                             nome VARCHAR(100) NOT NULL,
                             id_curso INT NOT NULL,
+                            id_professor INT NOT NULL,
                             creditos INT NOT NULL,
-                            capacidade_maxima INT DEFAULT 60,
-                            capacidade_minima INT DEFAULT 3,
+                            valor FLOAT NOT NULL,
                             status status_disciplina DEFAULT 'ATIVA',
                             categoria categoria_disciplina NOT NULL,
+                            FOREIGN KEY (id_professor) REFERENCES Professor(id) ON DELETE CASCADE,
                             FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE
-);
-
-CREATE TABLE Professor_Disciplina (
-                                      id_professor INT NOT NULL,
-                                      id_disciplina INT NOT NULL,
-                                      PRIMARY KEY (id_professor, id_disciplina),
-                                      FOREIGN KEY (id_professor) REFERENCES Professor(id) ON DELETE CASCADE,
-                                      FOREIGN KEY (id_disciplina) REFERENCES Disciplina(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Periodo_Matricula (
@@ -146,12 +145,6 @@ INSERT INTO Disciplina (nome, id_curso, creditos, categoria) VALUES
                                                                  ('Programação Web', 2, 5, 'OBRIGATORIA'),
                                                                  ('Inteligência Artificial', 3, 4, 'OPTATIVA'),
                                                                  ('Computação em Nuvem', 4, 3, 'OPTATIVA');
-
--- Associar professores às disciplinas
-INSERT INTO Professor_Disciplina (id_professor, id_disciplina) VALUES
-                                                                   (1, 1), -- Maria Oliveira -> Banco de Dados
-                                                                   (2, 2), -- Ricardo Mendes -> Programação Web
-                                                                   (3, 3); -- Juliana Costa -> Inteligência Artificial
 
 -- Inserir períodos de matrícula
 INSERT INTO Periodo_Matricula (data_inicio, data_fim) VALUES
