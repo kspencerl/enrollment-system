@@ -75,23 +75,32 @@ CREATE TABLE Disciplina (
 
 CREATE TABLE Periodo_Matricula (
                                    id SERIAL PRIMARY KEY,
-                                   dataInicio DATE NOT NULL,
-                                   dataFim DATE NOT NULL,
+                                   data_inicio DATE NOT NULL,
+                                   data_fim DATE NOT NULL,
                                    status status_periodo DEFAULT 'ABERTO'
 );
 
 CREATE TABLE Matricula (
                            id SERIAL PRIMARY KEY,
                            id_aluno INT NOT NULL,
-                           id_disciplina INT NOT NULL,
                            id_periodo INT NOT NULL,
                            status status_matricula NOT NULL DEFAULT 'INICIADA',
-                           dataMatricula TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                           data_matricula TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                            FOREIGN KEY (id_aluno) REFERENCES Aluno(id_usuario) ON DELETE CASCADE,
-                           FOREIGN KEY (id_disciplina) REFERENCES Disciplina(id) ON DELETE CASCADE,
                            FOREIGN KEY (id_periodo) REFERENCES Periodo_Matricula(id) ON DELETE CASCADE,
-                           UNIQUE (id_aluno, id_disciplina, id_periodo)
+                           UNIQUE (id_aluno, id_periodo)
 );
+
+
+CREATE TABLE Matricula_Disciplina (
+                                      id SERIAL PRIMARY KEY,
+                                      id_matricula INT NOT NULL,
+                                      id_disciplina INT NOT NULL,
+                                      FOREIGN KEY (id_matricula) REFERENCES Matricula(id) ON DELETE CASCADE,
+                                      FOREIGN KEY (id_disciplina) REFERENCES Disciplina(id) ON DELETE CASCADE,
+                                      UNIQUE (id_matricula, id_disciplina)
+);
+
 
 CREATE TABLE Cobranca (
                           id SERIAL PRIMARY KEY,

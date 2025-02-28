@@ -8,16 +8,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "matricula", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"id_aluno", "id_disciplina", "id_periodo"})
+        @UniqueConstraint(columnNames = {"id_aluno", "id_periodo"})
 })
 public class Matricula {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,10 +26,6 @@ public class Matricula {
     @ManyToOne
     @JoinColumn(name = "id_aluno", nullable = false)
     private Aluno aluno;
-
-    @ManyToOne
-    @JoinColumn(name = "id_disciplina", nullable = false)
-    private Disciplina disciplina;
 
     @ManyToOne
     @JoinColumn(name = "id_periodo", nullable = false)
@@ -39,5 +36,9 @@ public class Matricula {
     private StatusMatricula status = StatusMatricula.INICIADA;
 
     private LocalDateTime dataMatricula;
+
+    @OneToMany(mappedBy = "matricula", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MatriculaDisciplina> disciplinas = new ArrayList<>();
 }
+
 
