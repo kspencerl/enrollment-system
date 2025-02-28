@@ -44,7 +44,7 @@ public class Disciplina {
     @Enumerated(EnumType.STRING)
     private CategoriaDisciplina categoria;
 
-    @Column(name = "quantidadeAlunos", nullable = false)
+    @Column(name = "quantidade_alunos", nullable = false)
     private int quantidadeAlunos = 0;
 }
 

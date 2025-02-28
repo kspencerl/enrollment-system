@@ -68,7 +68,7 @@ CREATE TABLE Disciplina (
                             valor DECIMAL(10,2) NOT NULL,
                             status status_disciplina DEFAULT 'ATIVA',
                             categoria categoria_disciplina NOT NULL,
-                            quantidadeAlunos INT DEFAULT 0,
+                            quantidade_alunos INT DEFAULT 0,
                             FOREIGN KEY (id_professor) REFERENCES Professor(id_usuario) ON DELETE CASCADE,
                             FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE
 );
