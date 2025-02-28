@@ -110,3 +110,71 @@ CREATE TABLE Cobranca (
                           data_geracao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                           FOREIGN KEY (id_matricula) REFERENCES Matricula(id) ON DELETE CASCADE
 );
+
+-- Inserir usuários e associá-los às tabelas correspondentes
+INSERT INTO Usuario (nome, email, senha, tipo) VALUES
+                                                   ('João Silva', 'joao@email.com', 'senha123', 'ALUNO'),
+                                                   ('Maria Oliveira', 'maria@email.com', 'senha456', 'PROFESSOR'),
+                                                   ('Carlos Santos', 'carlos@email.com', 'senha789', 'SECRETARIA'),
+                                                   ('Ana Souza', 'ana@email.com', 'senha111', 'ALUNO'),
+                                                   ('Pedro Lima', 'pedro@email.com', 'senha222', 'ALUNO'),
+                                                   ('Fernanda Alves', 'fernanda@email.com', 'senha333', 'ALUNO'),
+                                                   ('Ricardo Mendes', 'ricardo@email.com', 'senha444', 'PROFESSOR'),
+                                                   ('Juliana Costa', 'juliana@email.com', 'senha555', 'PROFESSOR'),
+                                                   ('Gabriel Rocha', 'gabriel@email.com', 'senha666', 'SECRETARIA'),
+                                                   ('Beatriz Lima', 'beatriz@email.com', 'senha777', 'ALUNO');
+
+-- Inserir cursos
+INSERT INTO Curso (nome, creditos) VALUES
+                                       ('Engenharia da Computação', 240),
+                                       ('Administração', 200),
+                                       ('Direito', 220);
+
+-- Associar alunos a um curso (supondo que o ID dos cursos seja 1, 2 ou 3)
+INSERT INTO Aluno (id_usuario, id_curso) VALUES
+                                             (1, 1), -- João Silva - Engenharia da Computação
+                                             (4, 2), -- Ana Souza - Administração
+                                             (5, 3), -- Pedro Lima - Direito
+                                             (6, 1), -- Fernanda Alves - Engenharia da Computação
+                                             (10, 2); -- Beatriz Lima - Administração
+
+-- Associar professores
+INSERT INTO Professor (id_usuario) VALUES
+                                       (2), -- Maria Oliveira
+                                       (7), -- Ricardo Mendes
+                                       (8); -- Juliana Costa
+
+-- Associar funcionários da secretaria
+INSERT INTO Secretaria (id_usuario) VALUES
+                                        (3), -- Carlos Santos
+                                        (9); -- Gabriel Rocha
+
+-- Inserir disciplinas
+INSERT INTO Disciplina (nome, id_curso, id_professor, credito, valor, categoria) VALUES
+                                                                                     ('Banco de Dados', 1, 2, 4, 500.00, 'OBRIGATORIA'),
+                                                                                     ('Gestão Financeira', 2, 7, 3, 400.00, 'OPTATIVA'),
+                                                                                     ('Direito Penal', 3, 8, 5, 600.00, 'OBRIGATORIA');
+
+-- Inserir períodos de matrícula
+INSERT INTO Periodo_Matricula (data_inicio, data_fim) VALUES
+                                                          ('2024-07-01', '2024-07-30'),
+                                                          ('2024-08-01', '2024-08-30');
+
+-- Inserir matrículas
+INSERT INTO Matricula (id_aluno, id_periodo) VALUES
+                                                 (1, 1), -- João Silva no período 1
+                                                 (4, 1), -- Ana Souza no período 1
+                                                 (5, 2); -- Pedro Lima no período 2
+
+-- Associar matrículas às disciplinas
+INSERT INTO Matricula_Disciplina (id_matricula, id_disciplina) VALUES
+                                                                   (1, 1), -- João Silva em Banco de Dados
+                                                                   (2, 2), -- Ana Souza em Gestão Financeira
+                                                                   (3, 3); -- Pedro Lima em Direito Penal
+
+-- Inserir cobranças
+INSERT INTO Cobranca (id_matricula, valor) VALUES
+                                               (1, 500.00),
+                                               (2, 400.00),
+                                               (3, 600.00);
+
