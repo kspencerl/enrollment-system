@@ -1,13 +1,8 @@
 package com.enrollment.system.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.enrollment.system.enums.StatusMatricula;
+import com.enrollment.system.enums.StatusPeriodo;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +13,9 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="matricula")
+@Table(name = "matricula", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id_aluno", "id_disciplina", "id_periodo"})
+})
 public class Matricula {
 
     @Id
@@ -26,17 +23,20 @@ public class Matricula {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "aluno_id")
+    @JoinColumn(name = "id_aluno", nullable = false)
     private Aluno aluno;
 
-    @OneToOne
-    @JoinColumn(name = "disciplina_id")
+    @ManyToOne
+    @JoinColumn(name = "id_disciplina", nullable = false)
     private Disciplina disciplina;
 
-    @OneToOne
-    @JoinColumn(name = "periodo_matricula_id")
+    @ManyToOne
+    @JoinColumn(name = "id_periodo", nullable = false)
     private PeriodoMatricula periodoMatricula;
 
-    private LocalDateTime dataMatricula;
+    @Enumerated(EnumType.STRING)
+    private StatusMatricula status = StatusMatricula.INICIADA;
 
+    private LocalDateTime dataMatricula;
 }
+

@@ -1,12 +1,7 @@
 package com.enrollment.system.models;
 
 import com.enrollment.system.enums.TipoUsuario;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +11,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="aluno")
-public class Aluno extends Usuario{
+@PrimaryKeyJoinColumn(name = "id_usuario")
+public class Aluno extends Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", updatable = false)
-    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "id_curso", nullable = false)
+    private Curso curso;
 
-    public Aluno(String nome, String email, String senha) {
-        super(nome, email, senha, TipoUsuario.ALUNO);
+    public Aluno(Long id, String nome, String email, String senha, Curso curso) {
+        super(id, nome, email, senha, TipoUsuario.ALUNO);
+        this.curso = curso;
     }
-
 }
+
+

@@ -1,15 +1,7 @@
 package com.enrollment.system.models;
 
 import com.enrollment.system.enums.TipoUsuario;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,19 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="professor")
-public class Professor extends Usuario{
+@PrimaryKeyJoinColumn(name = "id_usuario")
+public class Professor extends Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", updatable = false)
-    private Long id;
+    @OneToMany(mappedBy = "professor")
+    private List<Disciplina> disciplinas;
 
-    @OneToMany
-    @JoinColumn(name = "disciplina_id")
-    private List<Disciplina> disciplina;
-
-    public Professor(String nome, String email, String senha) {
-        super(nome, email, senha, TipoUsuario.PROFESSOR);
+    public Professor(Long id, String nome, String email, String senha) {
+        super(id, nome, email, senha, TipoUsuario.PROFESSOR);
     }
-
 }
+

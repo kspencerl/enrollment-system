@@ -1,10 +1,7 @@
 package com.enrollment.system.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.enrollment.system.enums.StatusPeriodo;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +12,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="periodo_matricula")
+@Table(name = "periodo_matricula")
 public class PeriodoMatricula {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,4 +22,7 @@ public class PeriodoMatricula {
 
     private LocalDate dataFim;
 
+    @Enumerated(EnumType.STRING)
+    private StatusPeriodo status = StatusPeriodo.ABERTO;
 }
+
