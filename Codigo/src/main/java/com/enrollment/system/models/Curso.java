@@ -1,12 +1,6 @@
 package com.enrollment.system.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name="curso")
 public class Curso {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +21,7 @@ public class Curso {
 
     private int creditos;
 
-    @OneToMany
-    @JoinColumn(name = "disciplina_id")
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Disciplina> disciplinas;
-
 }
+

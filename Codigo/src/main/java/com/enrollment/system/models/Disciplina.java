@@ -2,16 +2,12 @@ package com.enrollment.system.models;
 
 import com.enrollment.system.enums.CategoriaDisciplina;
 import com.enrollment.system.enums.StatusDisciplina;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -19,7 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name="disciplina")
 public class Disciplina {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,17 +22,24 @@ public class Disciplina {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "curso_id")
+    @JoinColumn(name = "id_curso", nullable = false)
     private Curso curso;
+
+    @ManyToOne
+    @JoinColumn(name = "id_professor", nullable = false)
+    private Professor professor;
 
     private int credito;
 
-    private int capacidadeMaxima;
+    private BigDecimal valor;
 
-    private int capacidadeMinima;
+    @Enumerated(EnumType.STRING)
+    private StatusDisciplina status;
 
-    private StatusDisciplina statusDisciplina;
+    @Enumerated(EnumType.STRING)
+    private CategoriaDisciplina categoria;
 
-    private CategoriaDisciplina categoriaDisciplina;
-
+    @Column(name = "quantidadeAlunos", nullable = false)
+    private int quantidadeAlunos = 0;
 }
+
