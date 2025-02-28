@@ -18,19 +18,25 @@ public abstract class Usuario {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "senha")
     private String senha;
 
+    @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
-    private TipoUsuario tipoUsuario;
+    private TipoUsuario tipo;
 
     public Usuario(Long id, String nome, String email, String senha, TipoUsuario tipoUsuario) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.tipoUsuario = tipoUsuario;
+        this.tipo = tipoUsuario;
     }
 }
 
