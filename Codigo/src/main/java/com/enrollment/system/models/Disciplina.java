@@ -19,6 +19,7 @@ public class Disciplina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nome")
     private String nome;
 
     @ManyToOne
@@ -29,13 +30,17 @@ public class Disciplina {
     @JoinColumn(name = "id_professor", nullable = false)
     private Professor professor;
 
+    @Column(name = "credito")
     private int credito;
 
+    @Column(name = "valor")
     private BigDecimal valor;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusDisciplina status;
 
+    @Column(name = "categoria")
     @Enumerated(EnumType.STRING)
     private CategoriaDisciplina categoria;
 

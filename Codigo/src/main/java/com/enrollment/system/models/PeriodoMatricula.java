@@ -18,10 +18,13 @@ public class PeriodoMatricula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "dataInicio")
     private LocalDate dataInicio;
 
+    @Column(name = "dataFim")
     private LocalDate dataFim;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusPeriodo status = StatusPeriodo.ABERTO;
 }

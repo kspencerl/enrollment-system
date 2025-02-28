@@ -20,6 +20,6 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Acesso negado: Credenciais Invalidas");
         }
 
-        return new LoginResponse("Acesso Liberado", usuario.getTipoUsuario());
+        return new LoginResponse("Acesso Liberado", usuario.getTipo());
     }
 }

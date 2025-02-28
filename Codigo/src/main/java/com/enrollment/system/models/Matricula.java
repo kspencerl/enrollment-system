@@ -34,6 +34,7 @@ public class Matricula {
     @JoinColumn(name = "id_periodo", nullable = false)
     private PeriodoMatricula periodoMatricula;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusMatricula status = StatusMatricula.INICIADA;
 

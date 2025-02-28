@@ -7,14 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name="secretaria")
 @PrimaryKeyJoinColumn(name = "id_usuario")
-public class Secretaria extends Usuario {
-    public Secretaria(Long id, String nome, String email, String senha) {
-        super(id, nome, email, senha, TipoUsuario.SECRETARIA);
-    }
-}
+@DiscriminatorValue("secretaria")
+public class Secretaria extends Usuario {}
 
