@@ -19,10 +19,10 @@ public class PeriodoMatricula {
     private Long id;
 
     @Column(name = "dataInicio")
-    private LocalDate dataInicio;
+    private LocalDate data_inicio;
 
     @Column(name = "dataFim")
-    private LocalDate dataFim;
+    private LocalDate data_fim;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
