@@ -3,12 +3,16 @@ package com.enrollment.system.models;
 import com.enrollment.system.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
+@Getter
+@Setter
 public abstract class Usuario {
     @Id
     @Column(name = "id", updatable = false)
