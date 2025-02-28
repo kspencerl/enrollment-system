@@ -32,7 +32,7 @@ CREATE TABLE Usuario (
                          nome VARCHAR(100) NOT NULL,
                          email VARCHAR(100) UNIQUE NOT NULL,
                          senha VARCHAR(255) NOT NULL,
-                         tipo tipo_usuario NOT NULL
+                         tipoUsuario tipo_usuario NOT NULL
 );
 
 CREATE TABLE Curso (
@@ -42,24 +42,21 @@ CREATE TABLE Curso (
 );
 
 CREATE TABLE Aluno (
-                       id SERIAL PRIMARY KEY,
-                       id_usuario INT NOT NULL UNIQUE,
+                       id_usuario INT PRIMARY KEY,
                        id_curso INT NOT NULL,
                        FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE,
                        FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Professor (
-                           id SERIAL PRIMARY KEY,
-                           id_usuario INT NOT NULL UNIQUE,
+                           id_usuario INT PRIMARY KEY,
                            FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
 
 CREATE TABLE Secretaria (
-                           id SERIAL PRIMARY KEY,
-                           id_usuario INT NOT NULL UNIQUE,
-                           FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
+                            id_usuario INT PRIMARY KEY,
+                            FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Disciplina (
@@ -67,18 +64,19 @@ CREATE TABLE Disciplina (
                             nome VARCHAR(100) NOT NULL,
                             id_curso INT NOT NULL,
                             id_professor INT NOT NULL,
-                            creditos INT NOT NULL,
-                            valor FLOAT NOT NULL,
+                            credito INT NOT NULL,
+                            valor DECIMAL(10,2) NOT NULL,
                             status status_disciplina DEFAULT 'ATIVA',
                             categoria categoria_disciplina NOT NULL,
-                            FOREIGN KEY (id_professor) REFERENCES Professor(id) ON DELETE CASCADE,
+                            quantidadeAlunos INT DEFAULT 0,
+                            FOREIGN KEY (id_professor) REFERENCES Professor(id_usuario) ON DELETE CASCADE,
                             FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Periodo_Matricula (
                                    id SERIAL PRIMARY KEY,
-                                   data_inicio DATE NOT NULL,
-                                   data_fim DATE NOT NULL,
+                                   dataInicio DATE NOT NULL,
+                                   dataFim DATE NOT NULL,
                                    status status_periodo DEFAULT 'ABERTO'
 );
 
@@ -88,8 +86,8 @@ CREATE TABLE Matricula (
                            id_disciplina INT NOT NULL,
                            id_periodo INT NOT NULL,
                            status status_matricula NOT NULL DEFAULT 'INICIADA',
-                           data_matricula TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                           FOREIGN KEY (id_aluno) REFERENCES Aluno(id) ON DELETE CASCADE,
+                           dataMatricula TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                           FOREIGN KEY (id_aluno) REFERENCES Aluno(id_usuario) ON DELETE CASCADE,
                            FOREIGN KEY (id_disciplina) REFERENCES Disciplina(id) ON DELETE CASCADE,
                            FOREIGN KEY (id_periodo) REFERENCES Periodo_Matricula(id) ON DELETE CASCADE,
                            UNIQUE (id_aluno, id_disciplina, id_periodo)
@@ -107,7 +105,7 @@ CREATE TABLE Cobranca (
 -- Inserção de dados iniciais
 
 -- Inserir usuários (10 usuários)
-INSERT INTO Usuario (nome, email, senha, tipo) VALUES
+INSERT INTO Usuario (nome, email, senha, tipoUsuario) VALUES
                                                    ('João Silva', 'joao@email.com', 'senha123', 'ALUNO'),
                                                    ('Maria Oliveira', 'maria@email.com', 'senha456', 'PROFESSOR'),
                                                    ('Carlos Santos', 'carlos@email.com', 'senha789', 'SECRETARIA'),
@@ -140,27 +138,30 @@ INSERT INTO Professor (id_usuario) VALUES
                                        (8); -- Juliana Costa
 
 -- Inserir disciplinas (4 disciplinas)
-INSERT INTO Disciplina (nome, id_curso, creditos, categoria) VALUES
-                                                                 ('Banco de Dados', 1, 4, 'OBRIGATORIA'),
-                                                                 ('Programação Web', 2, 5, 'OBRIGATORIA'),
-                                                                 ('Inteligência Artificial', 3, 4, 'OPTATIVA'),
-                                                                 ('Computação em Nuvem', 4, 3, 'OPTATIVA');
+INSERT INTO Disciplina (nome, id_curso, id_professor, credito, valor, categoria) VALUES
+                                                                                     ('Banco de Dados', 1, 2, 4, 500.00, 'OBRIGATORIA'),
+                                                                                     ('Programação Web', 2, 2, 5, 600.00, 'OBRIGATORIA'),
+                                                                                     ('Inteligência Artificial', 3, 2, 4, 700.00, 'OPTATIVA'),
+                                                                                     ('Computação em Nuvem', 4, 7, 3, 800.00, 'OPTATIVA');
+
+
 
 -- Inserir períodos de matrícula
-INSERT INTO Periodo_Matricula (data_inicio, data_fim) VALUES
-                                                          ('2024-01-01', '2024-02-01'),
-                                                          ('2024-07-01', '2024-08-01');
+INSERT INTO Periodo_Matricula (dataInicio, dataFim, status) VALUES
+                                                          ('2024-01-01', '2024-02-01', 'FECHADO'),
+                                                          ('2024-07-01', '2024-08-01', 'FECHADO');
 
--- Inserir matrículas
-INSERT INTO Matricula (id_aluno, id_disciplina, id_periodo) VALUES
-                                                                (1, 1, 1), -- João em Banco de Dados
-                                                                (2, 2, 1), -- Ana em Programação Web
-                                                                (3, 3, 2), -- Pedro em IA
-                                                                (4, 4, 2); -- Fernanda em Computação em Nuvem
+INSERT INTO Matricula (id_aluno, id_disciplina, id_periodo, status, dataMatricula) VALUES
+                                                                                       (1, 1, 1, 'INICIADA', '2025-02-27 10:00:00'), -- João em Banco de Dados
+                                                                                       (4, 2, 1, 'INICIADA', '2025-02-27 10:05:00'), -- Ana em Programação Web
+                                                                                       (5, 3, 2, 'INICIADA', '2025-02-27 10:10:00'), -- Pedro em IA
+                                                                                       (6, 4, 2, 'INICIADA', '2025-02-27 10:15:00'); -- Fernanda em Computação em Nuvem
 
--- Inserir cobranças
-INSERT INTO Cobranca (id_matricula, valor) VALUES
-                                               (1, 1500.00),
-                                               (2, 1200.00),
-                                               (3, 1800.00),
-                                               (4, 1600.00);
+
+INSERT INTO Cobranca (id_matricula, valor, status, data_geracao) VALUES
+                                                                     (1, 1500.00, 'PENDENTE', '2025-02-27 10:00:00'),
+                                                                     (2, 1200.00, 'PENDENTE', '2025-02-27 10:05:00'),
+                                                                     (3, 1800.00, 'PENDENTE', '2025-02-27 10:10:00'),
+                                                                     (4, 1600.00, 'PENDENTE', '2025-02-27 10:15:00');
+
+
