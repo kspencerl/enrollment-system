@@ -1,15 +1,14 @@
 package com.enrollment.system.models;
 
 import com.enrollment.system.enums.StatusPeriodo;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "periodo_matricula")
@@ -28,4 +27,3 @@ public class PeriodoMatricula {
     @Enumerated(EnumType.STRING)
     private StatusPeriodo status = StatusPeriodo.ABERTO;
 }
-

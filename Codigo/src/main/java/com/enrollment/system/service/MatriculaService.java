@@ -1,18 +1,20 @@
 package com.enrollment.system.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.enrollment.system.dto.CancelarMatriculaRequest;
-import com.enrollment.system.dto.MatriculaRequest;
+import com.enrollment.system.dto.PeriodoMatriculaResponse;
 import com.enrollment.system.enums.StatusMatricula;
-import com.enrollment.system.models.*;
+import com.enrollment.system.dto.MatriculaRequest;
+
+import org.springframework.stereotype.Service;
 import com.enrollment.system.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.enrollment.system.models.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -92,5 +94,10 @@ public class MatriculaService {
         matricula.setStatus(StatusMatricula.CANCELADA);
         matriculaRepository.save(matricula);
     }
-}
 
+    // isPeriodMatricula() : boolean
+    public boolean isPeriodoMatriculaAberto(PeriodoMatriculaResponse periodo) {
+        LocalDate hoje = LocalDate.now();
+        return !hoje.isBefore(periodo.getDataInicio()) && !hoje.isAfter(periodo.getDataFim());
+    }
+}
