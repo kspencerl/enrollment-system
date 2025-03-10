@@ -11,5 +11,4 @@ import java.util.List;
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
     List<Disciplina> findByStatus(StatusDisciplina status);
 
-
 }

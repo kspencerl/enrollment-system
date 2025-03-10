@@ -23,11 +23,11 @@ public class Disciplina {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "id_curso", nullable = false)
+    @JoinColumn(name = "id_curso")
     private Curso curso;
 
     @ManyToOne
-    @JoinColumn(name = "id_professor", nullable = false)
+    @JoinColumn(name = "id_professor")
     private Professor professor;
 
     @Column(name = "credito")
@@ -44,7 +44,7 @@ public class Disciplina {
     @Enumerated(EnumType.STRING)
     private CategoriaDisciplina categoria;
 
-    @Column(name = "quantidade_alunos", nullable = false)
+    @Column(name = "quantidade_alunos")
     private int quantidadeAlunos = 0;
 }
 
