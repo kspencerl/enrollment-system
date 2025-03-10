@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="professor")
 @PrimaryKeyJoinColumn(name = "id_usuario")
-@DiscriminatorValue("professor")
 public class Professor extends Usuario {
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Disciplina> disciplinas;
 }
 
