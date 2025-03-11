@@ -1,17 +1,28 @@
 package com.enrollment.system.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.enrollment.system.enums.StatusMatricula;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
 public class MatriculaResponse {
-    private String message;
-    private Long matriculaId;
+    private Long id;
+    private StatusMatricula status;
+    private LocalDateTime dataMatricula;
 
-    public MatriculaResponse(String mensagem, Long matriculaId) {
-        this.message = mensagem;
-        this.matriculaId = matriculaId;
+    public MatriculaResponse(Long id, StatusMatricula status, LocalDateTime dataMatricula) {
+        this.id = id;
+        this.status = status;
+        this.dataMatricula = dataMatricula;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public StatusMatricula getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getDataMatricula() {
+        return dataMatricula;
     }
 }
-
