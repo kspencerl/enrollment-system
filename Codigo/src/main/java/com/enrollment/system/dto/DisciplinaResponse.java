@@ -1,6 +1,7 @@
 package com.enrollment.system.dto;
 
 import com.enrollment.system.enums.CategoriaDisciplina;
+import com.enrollment.system.enums.StatusDisciplina;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class DisciplinaResponse {
     private int credito;
     private BigDecimal valor;
     private CategoriaDisciplina categoria;
+    private StatusDisciplina status;
 }
