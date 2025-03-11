@@ -1,6 +1,7 @@
 package com.enrollment.system.service;
 
 import com.enrollment.system.dto.CancelarMatriculaRequest;
+import com.enrollment.system.dto.DisciplinaResponse;
 import com.enrollment.system.dto.FinalizarMatriculaRequest;
 import com.enrollment.system.dto.MatriculaRequest;
 import com.enrollment.system.enums.StatusMatricula;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -85,6 +87,20 @@ public class MatriculaService {
         }
 
         return matricula;
+    }
+
+    public List<DisciplinaResponse> consultarDisciplinasMatriculadas(Long idAluno, Long idPeriodo) {
+        List<Disciplina> disciplinas = matriculaRepository.buscarDisciplinasPorAlunoEPeriodo(idAluno, idPeriodo);
+
+        return disciplinas.stream()
+                .map(d -> new DisciplinaResponse(
+                        d.getNome(),
+                        d.getProfessor().getNome(),
+                        d.getCredito(),
+                        d.getValor(),
+                        d.getCategoria(),
+                        d.getStatus()))
+                .toList();
     }
 
     public void finalizarMatricula(FinalizarMatriculaRequest request) {

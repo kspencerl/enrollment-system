@@ -39,7 +39,8 @@ public class CurriculoService {
                         d.getProfessor().getNome(),
                         d.getCredito(),
                         d.getValor(),
-                        d.getCategoria()))
+                        d.getCategoria(),
+                        d.getStatus()))
                     .collect(Collectors.toList())
             ))
             .collect(Collectors.toList());
