@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,31 +59,31 @@ public class MatriculaService {
 
         List<Disciplina> disciplinas = disciplinaRepository.findAllById(request.getDisciplinas());
 
-        if (disciplinas.isEmpty()) {
-            throw new RuntimeException("Nenhuma disciplina válida foi selecionada.");
-        }
-
         List<Long> disciplinasJaMatriculadas = matriculaDisciplinaRepository
                 .findByMatriculaId(matricula.getId())
                 .stream()
                 .map(md -> md.getDisciplina().getId())
                 .collect(Collectors.toList());
 
-        List<MatriculaDisciplina> novasDisciplinas = disciplinas.stream()
-                .filter(disciplina -> !disciplinasJaMatriculadas.contains(disciplina.getId()))
-                .map(disciplina -> {
-                    MatriculaDisciplina matriculaDisciplina = new MatriculaDisciplina();
-                    matriculaDisciplina.setMatricula(matricula);
-                    matriculaDisciplina.setDisciplina(disciplina);
-                    return matriculaDisciplina;
-                })
-                .collect(Collectors.toList());
+        List<MatriculaDisciplina> novasDisciplinas = new ArrayList<>();
+
+        for (Disciplina disciplina : disciplinas) {
+            if (!disciplinasJaMatriculadas.contains(disciplina.getId())) {
+                MatriculaDisciplina matriculaDisciplina = new MatriculaDisciplina();
+                matriculaDisciplina.setMatricula(matricula);
+                matriculaDisciplina.setDisciplina(disciplina);
+                novasDisciplinas.add(matriculaDisciplina);
+
+                disciplina.setQuantidadeAlunos(disciplina.getQuantidadeAlunos() + 1);
+            }
+        }
 
         if (!novasDisciplinas.isEmpty()) {
             matriculaDisciplinaRepository.saveAll(novasDisciplinas);
+            disciplinaRepository.saveAll(disciplinas);
         }
 
-        return matricula; //Preciso validar isso, para que nçao retorne Matricula e sim um response
+        return matricula;
     }
 
     public void cancelarMatricula(CancelarMatriculaRequest request) {
