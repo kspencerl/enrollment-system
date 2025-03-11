@@ -1,5 +1,6 @@
 package com.enrollment.system.controller;
 
+import com.enrollment.system.dto.MatriculaResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -21,9 +22,10 @@ public class AlunoController {
 
     @Operation(summary = "Efetuar matrícula", description = "Realiza a matrícula de um aluno com base nos dados fornecidos.")
     @PostMapping("/matricular")
-    public ResponseEntity<Matricula> efetuarMatricula(@RequestBody MatriculaRequest request) {
+    public ResponseEntity<MatriculaResponse> efetuarMatricula(@RequestBody MatriculaRequest request) {
         Matricula matricula = matriculaService.efetuarMatricula(request);
-        return ResponseEntity.ok(matricula);
+        MatriculaResponse response = new MatriculaResponse(matricula.getId(), matricula.getStatus(), matricula.getDataMatricula());
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Cancelar matrícula", description = "Cancela a matrícula de um aluno com base nos dados fornecidos.")
