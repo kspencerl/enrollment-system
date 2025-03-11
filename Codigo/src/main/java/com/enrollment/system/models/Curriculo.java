@@ -21,12 +21,16 @@ public class Curriculo {
     @Column(name = "semestre")
     private String semestre;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    @OneToMany
-    @JoinColumn(name = "disciplina_id")
-    private List<Disciplina> disciplina;
+    @ManyToMany
+    @JoinTable(
+        name = "curriculo_disciplina",
+        joinColumns = @JoinColumn(name = "curriculo_id"),
+        inverseJoinColumns = @JoinColumn(name = "disciplina_id")
+    )
+    private List<Disciplina> disciplinas;
 
 }
