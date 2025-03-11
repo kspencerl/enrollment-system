@@ -30,7 +30,7 @@ public class AlunoController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Buscar Disciplinas Matriculadas", description = "Retorna a lista de disciplinas em que o aluno está matriculado.")
+    @Operation(summary = "Buscar Disciplinas Matriculadas", description = "Retorna a lista de disciplinas em que o aluno está matriculado no periodo.")
     @GetMapping("/{aluno}/disciplinas/{periodo}")
     public ResponseEntity<List<DisciplinaResponse>> consultarDisciplinasMatriculadas(
             @PathVariable Long aluno, @PathVariable Long periodo) {
@@ -39,6 +39,12 @@ public class AlunoController {
         return ResponseEntity.ok(disciplinas);
     }
 
+    @Operation(summary = "Remover disciplina da matrícula", description = "Remove uma disciplina da matrícula do aluno.")
+    @DeleteMapping("/{matricula}/disciplinas/{disciplina}")
+    public ResponseEntity<String> removerDisciplina(@PathVariable Long matricula, @PathVariable Long disciplina) {
+        matriculaService.removerDisciplinaDaMatricula(matricula, disciplina);
+        return ResponseEntity.ok("Disciplina removida com sucesso.");
+    }
 
     @Operation(summary = "Cancelar matrícula", description = "Cancela a matrícula de um aluno com base nos dados fornecidos.")
     @PostMapping("/cancelar")

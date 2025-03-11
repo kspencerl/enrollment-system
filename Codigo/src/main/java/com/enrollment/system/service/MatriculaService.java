@@ -1,9 +1,6 @@
 package com.enrollment.system.service;
 
-import com.enrollment.system.dto.CancelarMatriculaRequest;
-import com.enrollment.system.dto.DisciplinaResponse;
-import com.enrollment.system.dto.FinalizarMatriculaRequest;
-import com.enrollment.system.dto.MatriculaRequest;
+import com.enrollment.system.dto.*;
 import com.enrollment.system.enums.StatusMatricula;
 import com.enrollment.system.models.*;
 import com.enrollment.system.repository.*;
@@ -101,6 +98,14 @@ public class MatriculaService {
                         d.getCategoria(),
                         d.getStatus()))
                 .toList();
+    }
+
+    public void removerDisciplinaDaMatricula(Long idMatricula, Long idDisciplina) {
+        MatriculaDisciplina matriculaDisciplina = matriculaDisciplinaRepository
+                .findByMatricula_IdAndDisciplina_Id(idMatricula, idDisciplina)
+                .orElseThrow(() -> new RuntimeException("Disciplina não encontrada na matrícula!"));
+
+        matriculaDisciplinaRepository.delete(matriculaDisciplina);
     }
 
     public void finalizarMatricula(FinalizarMatriculaRequest request) {
