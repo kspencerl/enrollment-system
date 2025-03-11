@@ -1,6 +1,7 @@
 package com.enrollment.system.service;
 
 import com.enrollment.system.dto.CancelarMatriculaRequest;
+import com.enrollment.system.dto.FinalizarMatriculaRequest;
 import com.enrollment.system.dto.MatriculaRequest;
 import com.enrollment.system.enums.StatusMatricula;
 import com.enrollment.system.models.*;
@@ -84,6 +85,14 @@ public class MatriculaService {
         }
 
         return matricula;
+    }
+
+    public void finalizarMatricula(FinalizarMatriculaRequest request) {
+        Matricula matricula = matriculaRepository.findById(request.getMatricula())
+                .orElseThrow(() -> new RuntimeException("Matrícula não encontrada"));
+
+        matricula.setStatus(StatusMatricula.FINALIZADA);
+        matriculaRepository.save(matricula);
     }
 
     public void cancelarMatricula(CancelarMatriculaRequest request) {
