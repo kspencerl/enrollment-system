@@ -105,8 +105,16 @@ public class MatriculaService {
                 .findByMatricula_IdAndDisciplina_Id(idMatricula, idDisciplina)
                 .orElseThrow(() -> new RuntimeException("Disciplina não encontrada na matrícula!"));
 
+        Disciplina disciplina = matriculaDisciplina.getDisciplina();
+
+        if (disciplina.getQuantidadeAlunos() > 0) {
+            disciplina.setQuantidadeAlunos(disciplina.getQuantidadeAlunos() - 1);
+            disciplinaRepository.save(disciplina);
+        }
+
         matriculaDisciplinaRepository.delete(matriculaDisciplina);
     }
+
 
     public void finalizarMatricula(FinalizarMatriculaRequest request) {
         Matricula matricula = matriculaRepository.findById(request.getMatricula())

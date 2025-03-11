@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/aluno")
-@Tag(name = "Aluno API", description = "API para operações relacionadas à ações do aluno.")
+@Tag(name = "Aluno", description = "API para operações relacionadas à ações do aluno.")
 public class AlunoController {
 
     @Autowired
