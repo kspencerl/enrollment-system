@@ -175,8 +175,8 @@ INSERT INTO Matricula_Disciplina (id_matricula, id_disciplina) VALUES
                                                                    (3, 3); -- Pedro Lima em Direito Penal
 
 -- Inserir cobranças
-INSERT INTO Cobranca (id_matricula, valor) VALUES
-                                               (1, 500.00),
-                                               (2, 400.00),
-                                               (3, 600.00);
+INSERT INTO Cobranca (id_matricula, valor, data_vencimento) VALUES
+                                                                (1, 500.00, '2025-04-08'),
+                                                                (2, 400.00, '2025-04-08'),
+                                                                (3, 600.00, '2025-04-08');
 
