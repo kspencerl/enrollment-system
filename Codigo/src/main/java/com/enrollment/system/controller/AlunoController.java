@@ -1,7 +1,6 @@
 package com.enrollment.system.controller;
 
 import com.enrollment.system.dto.*;
-import com.enrollment.system.models.Disciplina;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
