@@ -1,9 +1,11 @@
 package com.enrollment.system.service;
 
 import com.enrollment.system.dto.*;
+import com.enrollment.system.enums.StatusCobranca;
 import com.enrollment.system.enums.StatusMatricula;
 import com.enrollment.system.models.*;
 import com.enrollment.system.repository.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class MatriculaService {
 
     @Autowired
     private MatriculaDisciplinaRepository matriculaDisciplinaRepository;
+
+    @Autowired
+    private CobrancaRepository cobrancaRepository;
 
     public Matricula efetuarMatricula(MatriculaRequest request) {
         Aluno aluno = (Aluno) alunoRepository.findById(request.getAluno())
@@ -105,15 +110,52 @@ public class MatriculaService {
                 .findByMatricula_IdAndDisciplina_Id(idMatricula, idDisciplina)
                 .orElseThrow(() -> new RuntimeException("Disciplina não encontrada na matrícula!"));
 
+        Disciplina disciplina = matriculaDisciplina.getDisciplina();
+
+        if (disciplina.getQuantidadeAlunos() > 0) {
+            disciplina.setQuantidadeAlunos(disciplina.getQuantidadeAlunos() - 1);
+            disciplinaRepository.save(disciplina);
+        }
+
         matriculaDisciplinaRepository.delete(matriculaDisciplina);
     }
 
+
+    @Transactional
     public void finalizarMatricula(FinalizarMatriculaRequest request) {
         Matricula matricula = matriculaRepository.findById(request.getMatricula())
                 .orElseThrow(() -> new RuntimeException("Matrícula não encontrada"));
 
         matricula.setStatus(StatusMatricula.FINALIZADA);
         matriculaRepository.save(matricula);
+
+        List<MatriculaDisciplina> disciplinas = matriculaDisciplinaRepository.findByMatriculaId(matricula.getId());
+
+        if (disciplinas.isEmpty()) {
+            throw new RuntimeException("Nenhuma disciplina encontrada para essa matrícula!");
+        }
+
+        BigDecimal valorTotal = disciplinas.stream()
+                .map(md -> md.getDisciplina().getValor())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        List<Cobranca> cobrancas = new ArrayList<>();
+        LocalDate dataVencimento = LocalDate.now().plusMonths(1).withDayOfMonth(8);
+
+        for (int i = 0; i < 6; i++) {
+            Cobranca cobranca = new Cobranca();
+            cobranca.setMatricula(matricula);
+            cobranca.setValor(valorTotal);
+            cobranca.setStatus(StatusCobranca.PENDENTE);
+            cobranca.setDataGeracao(LocalDateTime.now());
+            cobranca.setDataVencimento(dataVencimento);
+
+            cobrancas.add(cobranca);
+
+            dataVencimento = dataVencimento.plusMonths(1);
+        }
+
+        cobrancaRepository.saveAll(cobrancas);
     }
 
     public void cancelarMatricula(CancelarMatriculaRequest request) {
