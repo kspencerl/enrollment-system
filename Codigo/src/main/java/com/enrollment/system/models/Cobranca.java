@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,5 +33,8 @@ public class Cobranca {
 
     @Column(name = "data_geracao", nullable = false, updatable = false)
     private LocalDateTime dataGeracao = LocalDateTime.now();
+
+    @Column(name = "data_vencimento", nullable = false)
+    private LocalDate dataVencimento;
 }
 

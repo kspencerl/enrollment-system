@@ -21,5 +21,6 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
             nativeQuery = true)
     List<Disciplina> buscarDisciplinasPorAlunoEPeriodo(@Param("idAluno") Long idAluno,
                                                        @Param("idPeriodo") Long idPeriodo);
+
 }
 

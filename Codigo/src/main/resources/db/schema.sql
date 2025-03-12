@@ -108,6 +108,7 @@ CREATE TABLE Cobranca (
                           valor DECIMAL(10,2) NOT NULL,
                           status status_cobranca DEFAULT 'PENDENTE',
                           data_geracao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                          data_vencimento DATE NOT NULL, -- Corrigido, adicionando o tipo de dado DATE
                           FOREIGN KEY (id_matricula) REFERENCES Matricula(id) ON DELETE CASCADE
 );
 
@@ -123,6 +124,7 @@ INSERT INTO Usuario (nome, email, senha, tipo) VALUES
                                                    ('Juliana Costa', 'juliana@email.com', 'senha555', 'PROFESSOR'),
                                                    ('Gabriel Rocha', 'gabriel@email.com', 'senha666', 'SECRETARIA'),
                                                    ('Beatriz Lima', 'beatriz@email.com', 'senha777', 'ALUNO');
+
 
 -- Inserir cursos
 INSERT INTO Curso (nome, creditos) VALUES
