@@ -15,6 +15,7 @@ import lombok.Setter;
 @Setter
 public abstract class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
 
