@@ -158,12 +158,26 @@ public class MatriculaService {
         cobrancaRepository.saveAll(cobrancas);
     }
 
+    @Transactional
     public void cancelarMatricula(CancelarMatriculaRequest request) {
         Matricula matricula = matriculaRepository.findById(request.getMatricula())
                 .orElseThrow(() -> new RuntimeException("Matrícula não encontrada"));
 
+        List<MatriculaDisciplina> matriculaDisciplinas = matriculaDisciplinaRepository.findByMatriculaId(request.getMatricula());
+
+        for (MatriculaDisciplina matriculaDisciplina : matriculaDisciplinas) {
+
+            Disciplina disciplina = matriculaDisciplina.getDisciplina();
+
+            if (disciplina.getQuantidadeAlunos() > 0) {
+                disciplina.setQuantidadeAlunos(disciplina.getQuantidadeAlunos() - 1);
+                disciplinaRepository.save(disciplina);
+            }
+        }
+
         matricula.setStatus(StatusMatricula.CANCELADA);
         matriculaRepository.save(matricula);
     }
+
 }
 
